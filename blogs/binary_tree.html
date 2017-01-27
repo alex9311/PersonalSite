@@ -5,12 +5,12 @@
 
 <h3>Intro</h3>
 <p>
-I have been brushing up on basic algorithm problems in my preparation for software whiteboard interviewing (isn't my cover photo for this post great?).
+I have been brushing up on basic algorithm problems in my preparation for software <i>whiteboard</i> interviewing.
 Several of these involved binary trees.
-I like to do coding challenges in JavaScript, so I wanted an easy way to print binary trees in JavaScript.
-I was working from the console, so I wanted something that was pure ASCII. 
-This lead me down a path to making a cool recursive function to print binary trees in JavaScript.
+A fun challenge I came across was ASCII-printing binary trees.
+I like to do coding challenges in JavaScript, so I kept that pattern here.
 I was inspired by <a href="http://stackoverflow.com/questions/801740/c-how-to-draw-a-binary-tree-to-the-console">this StackOverflow post</a> for printing in ASCII tree in C.
+This algorithm isn't particulary JavaScript-y but I had a lot of fun working with it.
 </p>
 <h3>Setup</h3>
 <p>
@@ -113,7 +113,12 @@ If the characers do not all occupy the same amount of horizonal space, the tree 
 </div>
 <h3>What's Next?</h3>
 <p>
-It would be cool to use this to print each step in balancing a tree!
+This implementation works with a pre-declared two-dimentional array of spaces. 
+This causes some issues with narrow screens, because the rows wrap.
+So it would be great to make the row length dynamic to avoid wrapping.
+</p>
+<p>
+It would also be cool to use this to print each step in balancing a tree!
 I find that having visual representations of algorithms and data structures help me understand them better.
 </p>
 <script>
