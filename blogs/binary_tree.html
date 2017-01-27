@@ -1,0 +1,134 @@
+<link rel="stylesheet" href="styles/js_highlight/styles/default.css">
+<script src="styles/js_highlight/highlight.pack.js"></script>
+<script src="blogs/resources/binary_tree/binaryTree.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<h3>Intro</h3>
+<p>
+I have been brushing up on basic algorithm problems in my preparation for software whiteboard interviewing (isn't my cover photo for this post great?).
+Several of these involved binary trees.
+I like to do coding challenges in JavaScript, so I wanted an easy way to print binary trees in JavaScript.
+I was working from the console, so I wanted something that was pure ASCII. 
+This lead me down a path to making a cool recursive function to print binary trees in JavaScript.
+I was inspired by <a href="http://stackoverflow.com/questions/801740/c-how-to-draw-a-binary-tree-to-the-console">this StackOverflow post</a> for printing in ASCII tree in C.
+</p>
+<h3>Setup</h3>
+<p>
+For starters, we need a node class for our binary tree. 
+A popular way to define classes in JavaScript is with function, as is described <a target="_blank" href="http://www.phpied.com/3-ways-to-define-a-javascript-class/">here</a>.
+So here is the function defining the Node class:
+</p>
+<pre><code class="javascript">function Node(leftChild, rightChild, value) {
+  this.leftChild = leftChild;
+  this.rightChild = rightChild;
+  this.value = value;
+}
+</code></pre>
+<p>
+We also need an insert function, but that's all over the internet so I wont paste it here.
+Now the interesting stuff, recursively printing the tree.
+</p>
+<p>
+The basic idea of this algorithm is to work with an empty grid and build the tree from the bottom up. 
+The "empty grid" is a two-dimentional array, <i>printed_tree</i>, which is filled with empty spaces.
+<i>printed_tree</i>[0,0] is the top left of the printing space and  <i>printed_tree</i>[<i>n</i>,<i>n</i>] is the bottom right.
+Starting from the bottom allows the upper nodes to know how much offset from the left or right they need to print from.
+</p>
+<div style="width:25%;float:right;">
+  <img style="width:100%;border:2px solid black;float:right;margin-left:8px;" src="blogs/resources/binary_tree/toy_tree.jpg">
+  <div style="float:right" class="caption">Toy example tree.</div>
+</div>
+<p>
+The easiest way to understand this algorithm is by trying it with a toy example.
+Let's assume the input numbers are <b>[ 3, 2, 5, 4 ]</b>.
+So, we create the tree with our fancy insert and pass the tree head to the print_tree function below.
+</p>
+<p>
+On the initial call, <i>is_left</i> is false and <i>offset</i> and <i>depth</i> are 0.
+On the first step of recursion, the tree head (<font face="courier">003</font>) will call print on its left child (<font face="courier">002</font>) with a depth of 1 and offset 0 still.
+</p>
+<p>
+At (<font face="courier">002</font>), both children are (<font face="courier">null</font>), so we have a <i>depth</i> of 1, <i>left</i> of 0 and <i>right</i> of 0.
+Given those values, we print the node starting at <i>printed_tree</i> [2][0].
+Then, the if/else conditions are used to print the arms connecting (<font face="courier">002</font>) to its parent node. 
+In this case, we print an arm starting at <i>printed_tree</i> [1][2] and going across 6 spaces.
+</p>
+<p>
+So (<font face="courier">002</font>) pops back up to the head with a value of 5 for <i>left</i>.
+Now the cool part, <i>print_tree</i> is called on the right child, (<font face="courier">005</font>), with an offset of 10.
+This goes down to the left child (<font face="courier">004</font>) with the same offset.
+(<font face="courier">004</font>) prints like the other leaf and returns 5 to (<font face="courier">005</font>) as <i>left</i>.
+</p>
+<p>
+Finally, (<font face="courier">005</font>) prints starting at 10+5.
+Note that this overwrites part of the branch printed to connect this node to its child.
+This leaves the head node to print with a <i>left</i> of 5 and <i>right</i> of 10.
+So the final node prints starting at [0][5].
+</p>
+
+<pre><code class="javascript">function print_tree(node, is_left, offset, depth) {
+    if(!node){return 0;}
+    var zeroed_value = ("("+('000' + node.value).substr(-3)+")").split("");
+    var node_width = zeroed_value.length;
+
+    var left = print_tree(node.leftChild, true, offset, depth+1);
+    var right= print_tree(node.rightChild, false, offset+left+node_width, depth+1);
+
+    for (i = 0; i < node_width; i++){
+        printed_tree[depth][offset + left + i] = zeroed_value[i];
+    }
+
+    if (depth>0 && is_left) {
+        for (i = 0; i < node_width + right; i++){
+            printed_tree[depth - 1][offset + left + Math.floor(node_width/2) + i] = "-";
+        }
+        printed_tree[depth - 1][offset + left + Math.floor(node_width/2)] = ".";
+    
+    }else if (depth>0 && !is_left) {
+        for (i = 0; i < left + node_width; i++){
+            printed_tree[depth - 1][offset - Math.floor(node_width/2) + i] = "-";
+        }
+        printed_tree[depth - 1][offset + left + Math.floor(node_width/2)] = ".";
+    }
+
+    return left + zeroed_value.length + right;
+}
+</code></pre>
+<p>
+Note that this method does not work if the tree is printed in a proportional font or <i>non-monospaced</i> font. 
+If the characers do not all occupy the same amount of horizonal space, the tree structure gets distorted.
+<h3>Try it Out!</h3>
+
+<form class="form-horizontal" onsubmit="myFunction()">
+  <div class="form-group">
+    <label class="col-md-3">Input Numbers:</label>
+    <div class="col-md-9">
+      <input class="form-control" id="tree_demo_input" value="3,2,5,4"></input>
+    </div>
+  </div>
+  <input type="button"  onClick="myFunction()" value="Print the Tree" class="btn col-md-12"></input>
+</form>
+
+<div id="tree_print_spot" style="font-family:courier;font-size:16px">
+</div>
+<h3>What's Next?</h3>
+<p>
+It would be cool to use this to print each step in balancing a tree!
+I find that having visual representations of algorithms and data structures help me understand them better.
+</p>
+<script>
+function myFunction() {
+    //clear old tree and get new input
+    document.getElementById("tree_print_spot").innerHTML = ""; 
+    var input_array = document.getElementById("tree_demo_input").value.split(",").map(x=> parseInt(x));
+
+    var tree_head = create_tree(input_array);
+    document.getElementById("tree_print_spot").innerHTML += "tree height is: "+height(tree_head)+"<br>";
+    var tree_string = stringify_tree(tree_head);
+    for(i=0; i<=height(tree_head); i++) {
+        document.getElementById("tree_print_spot").innerHTML += tree_string[i].join("").replace(/ /g, '\u00a0')+"<br>";
+    }
+    window.scrollTo(0,document.body.scrollHeight);
+}
+</script>
+

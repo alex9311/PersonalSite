@@ -1,0 +1,86 @@
+<h3>Intro</h3>
+<p>
+<i>Do the algorithms curating the content we see online limit our learning and exposure?</i>
+</p>
+<p>
+This was the question that started me on my thesis project.
+The idea that personalization online has a negative impacts on users is an idea made popular by <a target="_blank" href="https://en.wikipedia.org/wiki/Eli_Pariser">Eli Pariser</a>, in his book <i>The Filter Bubble Effect</i>.
+He also has a short <a target="_blank" href="https://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles">Ted Talk</a> summarizing his ideas.
+He argues that by showing us content we are expected to enjoy, algorithms lock us into individual bubbles of content. 
+This is especially concerning given that the founding tennants of the World Wide Web was to create an open platform for a total exchange of information without gatekeepers.
+</p>
+<p>
+This idea is easy enough to make a toy example with, using Google searching and a VPN.
+Below, you can see the images google returns when searching for the phrase <i>russia crimea</i> from the US and from Russia. 
+The algorithms are clearly limiting the results to only items the user is expected to want to see (based on location and language).
+This does seem like it would keep users in content bubbles, not allowing them to see content conflicting with their views.
+</p>
+<div class="wide-image-container">
+    <img class="wide-image" src="blogs/resources/thesis/america_crimea.jpg">
+    <div class="caption">Results for Americans, can see soliders and other negative imagery</div>
+</div>
+<div class="wide-image-container">
+    <img class="wide-image" src="blogs/resources/thesis/russia_crimea.jpg">
+    <div class="caption">Results for Russians, can see patriotic imagery</div>
+</div>
+<p>
+There have been some efforts to test the existance of a <i>Filter Bubble Effect</i> in different online settings.
+The challenges involed in these experience include how to measure the filter bubble, how to measure the effect of the algorithm on the user, and how to generalize these measures to different online settings.
+In the research I studied, I found conflicting results.
+</p>
+<p>
+In addition to research examining the presence of filter bubbles, there are also academics focused on building specialized recommender systems with the purpose of exposing users to new content.
+These specialized recommenders are called <i>Serendipitous Recommenders</i>.
+A serendipitous discovery is a pleasant discovery made by accident but is enjoyable.
+For example, wandering down an aisle in a bookstore you wouldn't usually go down and finding a book you enjoy.
+</p>
+<p>
+To my surprise, I found no research testing whether or not systems with serendipitous recommenders had less of a filter bubble effect than systems with typical recommender systems.
+This is where my thesis project fills the gap in research.
+I set out to test whether or not serendipitous recommender systems mitigated the filter bubble effect.
+</p>
+<h3>Experiment</h3>
+<p>
+For my experiment, I needed a platform to test on and two recommender systems (one serendipitous and one baseline).
+With that setup, I could have one user group for each type of recommender system and observe the filter bubble effect in each group.
+</p>
+<p>
+I used the discussion forums <a target="_blank" href="http://forum.viva.nl/">Viva Forum</a>, a Dutch website put out by the company I was interning at.
+This site was a good testing ground because it offered a wide range of content and was had a lot of traffic.
+</p>
+<div style="width:50%;float:right;">
+  <img style="width:100%;border:2px solid black;float:right;margin-left:5px;" src="blogs/resources/thesis/serendip.gif">
+  <div style="float:right" class="caption">Animation showing how the serendipitous recommender algorithm works</div>
+</div>
+<p>
+For my baseline recommendation system, I used a well-known collaborative filtering algorithm.
+For the serendipitous recommender system, I implemented a recommender described in literature from scratch. 
+The basic idea behind how the serendipitous recommender works is shown in the animation here.
+</p>
+<p>
+I built both of my recommender system services using PredictionIO.
+PredictionIO is a machine learning server framework, which recently was taken into apache incubation.
+PredictionIO is built on Apache Spark, MLlib, HBase, Spray, Elasticsearch.
+My serendipitous recommender implementation can be seen on GitHub <a target="_blank" href="https://github.com/alex9311/predictionio-serendipitous-recommender-template">here</a>.
+I also contributed <a target="_blank" href="https://predictionio.incubator.apache.org/deploy/monitoring/">a guide</a> to the PredictionIO documentation on how to add system monitoring to a PredictionIO service.
+</p>
+<p>
+The setup for the serendipitous recommender required me to use LDA to make a topic model of the discussion forum content.
+I used Spark for this and have a <a target="_blank" href="https://gist.github.com/alex9311/774089d936eee505d7832c6df2eb597d">short gist</a> describing what I did because I could not find a complete guide elsewhere.
+The picture I used for the cover photo of this blog is a piece of one of the LDA similarity graphs I generated for the discussion forum posts. 
+Besides the recommender technology, I also covered some Natural Language processing topics in my data processing.
+I used a cool Python library called <a target="_blank" href="https://languagemachines.github.io/frog/">Frog</a> designed specifically for Dutch language processing in determining TF-IDF similarity between discussions. 
+</p>
+<h3>Findings and Takeaways</h3>
+<p>
+Once I got my recommenders and other needed tech working, I ran my A/B test with both recommenders for a month. 
+In my experiment, I found that the serendipitous recommender did server more serendipitous recommendations, which was a good start.
+However, the users receiving serendipitous recommendations did not have a noticable change in their consumption pattern from the users receiving typical recommendations.
+Thus, my findings would indicate that humans put themselves in filter bubbles, rather than algorithms being to blame.
+If you're seriously interested, you can read my thesis paper <a target="_blank" href="http://repository.tudelft.nl/islandora/object/uuid%3A4cfd6724-67e7-4051-8b13-da5cd2bddcb7?collection=education">here</a>.
+</p>
+<p>
+I really enjoyed working on this thesis project.
+I was most proud of the pile of new technology I learned to get my experiment going: AWS deployment, Monit, PredictionIO, Apache Spark, Jenkins, NLP, Spark Libraries (GraphX, LDA, MLlib), and, of course, LaTeX.
+My thesis committee was very happy with my work and awarded me an 8.5/10, which according to <a href="http://www.mastersportal.eu/articles/764/grading-system-in-the-netherlands-and-the-us-grading-system-compared.html">article about different grading systems</a> is a 4.0 grade on the US system.
+</p>
