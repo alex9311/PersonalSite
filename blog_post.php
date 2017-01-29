@@ -10,8 +10,7 @@
 <body>
     <?php include_once('common/navbar.php');?>
     <?php 
-        $blog_id = pg_escape_string($_GET['id']);
-        $blog = get_blog($blog_id); 
+        $blog = get_blog($_GET['id']); 
     ?>
 
     <div class="main-content">

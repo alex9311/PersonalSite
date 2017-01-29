@@ -15,7 +15,7 @@ function connect_mysql(){
 
 function get_blog($id){
     $conn = connect_mysql();
-    $sql = 'SELECT * FROM blogs WHERE id = '.$id;
+    $sql = 'SELECT * FROM blogs WHERE id = '.mysqli_escape_string($conn, $id);
     $results = $conn->query($sql);
     $blog = $results->fetch_object();
     $conn->close();
@@ -25,7 +25,7 @@ function get_blog($id){
 function print_blog_list($type){
     $conn = connect_mysql();
 
-    $sql = 'SELECT * FROM blogs WHERE type = "'.$type.'" ORDER BY date DESC';
+    $sql = 'SELECT * FROM blogs WHERE type = "'.mysqli_escape_string($conn,$type).'" ORDER BY date DESC';
     $result = $conn->query($sql);
 
     while($row = $result->fetch_assoc()){
