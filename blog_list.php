@@ -14,7 +14,7 @@
     <div class="main-content">
         <div class="container">
             <div class="row">
-                  <h1><?php echo htmlspecialchars(ucfirst($blog_type)); ?></h1>
+                  <h1><?php echo ucfirst(htmlspecialchars($blog_type)); ?></h1>
                   <?php print_blog_list($blog_type);?>
             </div>
         </div>
