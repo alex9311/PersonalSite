@@ -639,8 +639,6 @@ $include-ext-util-translatable-csstransform: true;
 $include-ext-util-translatable-dom: true;
 $include-ext-util-translatable-scrollparent: true;
 $include-ext-util-translatable-scrollposition: true;
-$include-ext-ux-livesearchgridpanel: true;
-$include-ext-ux-statusbar-statusbar: true;
 $include-ext-view-abstractview: true;
 $include-ext-view-boundlist: true;
 $include-ext-view-boundlistkeynav: true;

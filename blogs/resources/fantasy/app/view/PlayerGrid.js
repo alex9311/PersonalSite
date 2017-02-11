@@ -1,9 +1,9 @@
 Ext.define('Fantasy.view.PlayerGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.playergrid',
-    requires: [
-        'Fantasy.store.Players'
-    ],
+    requires: [ 'Fantasy.store.Players' , 'Ext.grid.filters.Filters'],
+    plugins: [ 'gridfilters' ],
+
     emptyText: 'Couldnt load stock data',
     store: 'Players',
     frame: 'true',
@@ -18,6 +18,10 @@ Ext.define('Fantasy.view.PlayerGrid', {
         matchFieldWidth:true
     },"->",{
         xtype:'button',
+        text:'Clear Filters',
+        action:'clear_filters'
+    },{
+        xtype:'button',
         text:'Reload Data',
         action:'reload_stores'
     }],
@@ -28,7 +32,7 @@ Ext.define('Fantasy.view.PlayerGrid', {
                 return '<img style="height:16px" src="resources/team_logos/' + record.get('team') + '.png" />&nbsp'+ val;
             }
         },
-        { text: 'Position',  	dataIndex: 'position', 	flex: 1, hidden: false},
+        { text: 'Position',  	dataIndex: 'position', 	flex: 1, hidden: false, filter:{type: "list"} },
         { text: 'Bye',  	dataIndex: 'bye', 	flex: 1, hidden: false},
 
         { dataIndex: 'injury_date', flex: 3, hidden: false,

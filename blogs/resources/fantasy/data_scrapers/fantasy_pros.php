@@ -67,13 +67,15 @@ function get_fantasy_pros_data(){
 
 	$player_id = $name.", ".strtoupper($position).", ".$team;
 
-	$players[$player_id] = array_merge($players[$player_id],array(
-	    "overall_rank" => $rank,
-	    "best_overall_rank" => $row->find('td',4 )->plaintext,
-	    "worst_overall_rank" => $row->find('td',5 )->plaintext,
-	    "avg_overall_rank" => $row->find('td',6 )->plaintext,
-	    "std_dev_overall_rank" => $row->find('td',7)->plaintext
-	));
+        if(array_key_exists($player_id, $players)){
+            $players[$player_id] = array_merge($players[$player_id],array(
+                "overall_rank" => $rank,
+                "best_overall_rank" => $row->find('td',4 )->plaintext,
+                "worst_overall_rank" => $row->find('td',5 )->plaintext,
+                "avg_overall_rank" => $row->find('td',6 )->plaintext,
+                "std_dev_overall_rank" => $row->find('td',7)->plaintext
+            ));
+        }
     }
     return $players;
 }
