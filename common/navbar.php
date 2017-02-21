@@ -14,9 +14,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="index.php">Home</a></li>
-        <li><a href="blog_list.php?type=programming">Programming</a></li>
-        <li><a href="blog_list.php?type=outdoors">Outdoors</a></li>
-        <li><a href="contact_about.php">About/Contact</a></li>
+        <li><a href="blog-list.php?type=programming">Programming</a></li>
+        <li><a href="blog-list.php?type=outdoors">Outdoors</a></li>
+        <li><a href="contact-about.php">About/Contact</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

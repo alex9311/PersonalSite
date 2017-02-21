@@ -1,11 +1,14 @@
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Alexander (Alex) Simes' blog website about programming and the outdoors.">
+<meta name="author" content="Alexander Simes">
 
-<meta property="og:title" content="Alexander Simes">
-<meta property="og:image" content="resources/logo_thumb.jpg">
-<meta property="og:description" content="blogs about outdoors and programming">
+<meta property="og:title" content="Alexander Simes Blog">
+<meta property="og:site_name" content="Alexander Simes Blog">
+<meta property="og:description" content="Blogs by Alex about outdoors and programming.">
+<meta property="og:image" content="resources/logo-thumb.jpg" />
+<meta property="og:type" content="blog"/>
+
 
     <title>alexandersimes</title>
 

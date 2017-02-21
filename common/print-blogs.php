@@ -34,7 +34,7 @@ function print_blog_list($type){
             <div class="col-md-12">
                 <h3> <a style="color:black;" href="blog_post.php?id='.$row['id'].'">'.$row['title'].'</a></h3>
                 <p style="margin-bottom:1%;">'.date( 'F d, Y', strtotime($row['date'])).'</p>
-                <a href="blog_post.php?id='.$row['id'].'">
+                <a href="blog-post.php?id='.$row['id'].'">
                   <div class="wide-image-container">
                     <img class="wide-image" src="blogs/cover_images/'.$row['content_link'].'.jpg">
                   </div>
