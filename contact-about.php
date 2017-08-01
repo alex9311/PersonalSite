@@ -35,10 +35,6 @@
                     The <i>Programming</i> side of the site serves as a portfolio and could be helpful to other programmers as well.
                     I share cool problems I have solved or personal projects I take on.
                   </p>
-                  <h3>Hiring</h3>
-                  <p>
-                    I'm currently working as a contracted full stack developer for <a target="_blank" href="http://www.meganmiley.com/mdgroup/">MileyDesign Group</a>, but I am searching for a full-time role in software development in the Seattle area.
-                    You can see my resume <a target="_blank" href="resources/alex_simes_resume.pdf">here</a>, or check out my <a target="_blank" href="https://www.linkedin.com/in/alexander-simes-592a7262">LinkedIn</a> profile.
                   <h3>Contact</h3>
                   <p>Send me an email at <span id="email"></span>!</p>
                   <script>
