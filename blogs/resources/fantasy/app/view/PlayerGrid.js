@@ -55,6 +55,7 @@ Ext.define('Fantasy.view.PlayerGrid', {
             header: '<img  style="vertical-align:middle;height:16px;" src="resources/fp.png"/>&nbspStd. Dev Position Rank</img>'},
 
         { text: 'Overall Rank', dataIndex: 'overall_rank', 			flex: 1, hidden: false,
+	    renderer: function(val, meta, record, rowIndex) {if(val === 0){ return ''; } return val;},
             header: '<img  style="vertical-align:middle;height:16px;" src="resources/fp.png"/>&nbspOverall Rank</img>'},
         { text: 'Average Overall Rank', 	dataIndex: 'avg_overall_rank', 	flex: 1, hidden: true,
             header: '<img  style="vertical-align:middle;height:16px;" src="resources/fp.png"/>&nbspAverage Overall Rank</img>'},
