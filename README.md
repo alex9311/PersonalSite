@@ -1,2 +1,2 @@
 # PersonalSite
-The github repo for my personal site, hosted at [alexandersimes.com](http://www.alexandersimes.com).
+The github repo for my personal site, no longer hosted anywhere because I don't have time to add interesting content
